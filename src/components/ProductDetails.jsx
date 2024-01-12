@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from "react-redux"
 import { addCart } from '../reduxtk/slices/productSlice'
-import './css/prodDetail.css'
+import { productDetails } from '../reduxtk/slices/productSlice'
+import '../../ulities/css/prodDetail.css'
 import { faStar} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useEffect } from "react"
 
-export const ProductDetails =()=>{
+export const ProductDetails =({prod1})=>{
     const prod=useSelector((state)=>state.product.productDetails)
     let cart=useSelector((state)=>state.product.cart)
 
@@ -12,9 +14,16 @@ export const ProductDetails =()=>{
     const addToCart =(i)=>{  
         dispatch(addCart(i))
       }
-      
-      console.log(prod)
-    return <div className="mainprodDetail">     
+      useEffect(()=>{
+        //console.log("title1:", prod1)
+     
+      return ()=>{
+        dispatch(productDetails(null))
+      } },
+      [])
+      console.log( prod1)
+    return <div>
+   <div className="mainprodDetail col-lg-5">     
       <div className="advt"></div>
 <div className="prodDetail"> 
      
@@ -37,6 +46,12 @@ export const ProductDetails =()=>{
     
     </div>
 
+    </div> 
+          {prod1.map((el)=>(
+            <div>
+              <div>{el.title}</div>
+            </div>
+          ))}
     </div>
     
     

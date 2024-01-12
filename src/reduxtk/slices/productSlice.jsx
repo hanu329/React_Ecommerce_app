@@ -21,24 +21,25 @@ const productSlice= createSlice({
     name:'product',
     initialState,
     reducers:{
-        getProduct(state, action){
+      
+        getProduct:(state, action)=>{
             state.prod=action.payload
         }, 
-       filterProduct(state, action){
+       filterProduct:(state, action)=>{
             state.filteredProd=action.payload
         },     
 
-        addCart(state, action){  
+        addCart:(state, action)=>{  
           //  console.log(action.payload)       
           state.cart={...state.cart,[action.payload]:state.cart[action.payload]+1};
       
          localStorage.setItem("cart", JSON.stringify(state.cart))
         },
-        removeCart(state, action){
+        removeCart:(state, action)=>{
             state.cart={...state.cart,[action.payload]:state.cart[action.payload]-1};
             localStorage.setItem("cart", JSON.stringify(state.cart))
           },
-        productDetails(state,action){
+        productDetails:(state,action)=>{
            state.productDetails=action.payload;
            localStorage.setItem("prodDetail", JSON.stringify(state.productDetails))
         }

@@ -3,14 +3,18 @@ import {useDispatch,useSelector} from 'react-redux'
 import { productDetails } from '../reduxtk/slices/productSlice'
 import { Link } from 'react-router-dom'
 import { filterProduct,getProduct,addCart, removeCart } from '../reduxtk/slices/productSlice'
-import './css/product.css'
+import '../../ulities/css/product.css'
 import { faStar, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useState, useEffect ,useContext} from 'react'
 import { DataContext } from '../context/DataContext'
+import { PaginatedItem } from './PaginatedItem'
+
 
 export const Product =()=>{
-      const [flag, setFlag]=useState(0)
+      const [d, setD]=useState([])
+      const [res, setRes] = useState(0);
+
     let prod=useSelector((state)=>state.product.prod)
     let cart=useSelector((state)=>state.product.cart)
     let usr=useSelector((state)=>state.user.userDetail)
@@ -19,15 +23,26 @@ export const Product =()=>{
     const {f,handleF}=useContext(DataContext)
   
     const dispatch=useDispatch();
+
 useEffect(()=>{
 handleF(0)
   return ()=>{
     handleF(1)
    }
 },[])
+
+
   const productDetail =(item)=>{
+  
+    let data= prod.filter((el)=>{
+      return el.title.toLowerCase().includes(item.title.slice(0,4).toLowerCase())
+    })
+   
+   //setD(data)
     dispatch(productDetails(item))
   }
+ 
+ 
   const addToCart =(i)=>{ 
     dispatch(addCart(i))
   }
@@ -101,10 +116,18 @@ let i=1;
 // i++
 // },5000)
     
+const pageFun1=(res)=>{
 
-    return <div className='prodDiv'>
-    
+  let min=res[0]
+  console.log(min)
+ setRes(min)
+}
+    return  <>
+{/*     
+     <a href='./Demo'>demo</a> */}
      
+    <div className='prodDiv'>
+    
     
       <div className='selectDiv'>
       <select name="sort" id="sort" onChange={()=>handleSort()} defaultValue={'default'}>
@@ -122,6 +145,7 @@ let i=1;
             <img src='https://st2.depositphotos.com/2219414/9517/v/600/depositphotos_95177406-stock-illustration-banner-advertising-for-marketing.jpg' id='adImg' alt="" height='60%' width='100%' />
           </div>
       </div>
+      {console.log(prod)}
     {filterProd.length>0?<div className='filterDiv'>
       {filterProd.map((el)=>(
      <div key={el.id} >  
@@ -148,10 +172,12 @@ let i=1;
      </div>
     ))}
     </div>:
-    
+     
     <div className='normDiv'> {prod.map((el)=>(
-     <div key={el.id} >  
-    <Link to={'/productDetails'} style={{textDecoration:"none"}}>
+ <>
+ {/* el.id>=res && el.id<res+5?<div key={el.id} */}
+ {1==1?<div key={el.id}>
+      <Link to={'/productDetails'} style={{textDecoration:"none"}}>
     <div onClick={()=>productDetail(el)} > 
      <img src={el.image} alt="" height='100px' width='100px' className='prodImg' />
      <div className='priceTitle'>
@@ -171,10 +197,18 @@ let i=1;
          <button onClick={()=>addToCart(el.id)} className='priceBtn'>add to Cart</button>
          
          </div>}      
-     </div>
-    ))}</div>}
+     </div>:null}
+ </>
+      ))}
+     
+    
+    </div>}
       
+   
     </div>
+    {/* <PaginatedItem className="pageClass" itemsPerPage={5} pageFun={pageFun1} />
+    */}
+    </>
 }
 
 

@@ -8,12 +8,13 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-package.json
-package-lock.json
-vite.config.js
+
 vite.config.js.timestamp-1686487937927-8a4df80051876.mjs
 db.json
 .eslintrc.cjs
+.gitignore
+../server
+ghatiya.js
 dist
 dist-ssr
 *.local

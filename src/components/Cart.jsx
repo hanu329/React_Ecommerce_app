@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { removeCart ,addCart} from "../reduxtk/slices/productSlice"
 import { useNavigate, Navigate } from "react-router-dom"
 import 'font-awesome/css/font-awesome.min.css';
-import './css/cart.css'
+import '../../ulities/css/cart.css'
 import {faStar, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {loadStripe} from '@stripe/stripe-js';
@@ -62,19 +62,34 @@ s[j.id]=cart[i]
     const headers={
       "Content-Type":"application/json"
     }
-    const res= await fetch("http://localhost:3001/pay",{
+    await fetch("http://localhost:3001/pay",{
       method:"POST",
      headers,
      body:JSON.stringify(body)
+    }).then(function(response) {
+      return response.json();
     })
-    const session = res.json()
-    const result= stripe.redirectToCheckout({
-      sessionId:session.id,
+    .then(function(session) {
+      return stripe.redirectToCheckout({ sessionId: session.id });
     })
-    if(result.error){
-      console.log(result.error)
-    }
-    }
+    .then(function(result) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, you should display the localized error message to your
+      // customer using `error.message`.
+      if (result.error) {
+        alert(result.error.message);
+      }
+    // const session = res.json()
+    // const result= stripe.redirectToCheckout({
+    //   sessionId:session.id,
+    // })
+    // if(result.error){
+    //   console.log(result.error)
+    // }
+
+    })
+  }
+
 
     const addToCart =(i)=>{  
       dispatch(addCart(i))
@@ -86,8 +101,7 @@ s[j.id]=cart[i]
 
   let totalPrice=0;
   let totalItem=0;
-  //console.log(prod, cart)
-  
+ 
        let cartitem= prod.map((el)=>{
         for(let i in cart){
          if(cart[i]>0 && el.id==i){
@@ -105,9 +119,8 @@ s[j.id]=cart[i]
                 </div>
              
                 </div>
-         }
-        }
-    })
+         } } })
+       
     
     return <div className="cartDiv">
 {sts==false?<div><Navigate to={'/'} /></div> :<div>
@@ -117,13 +130,17 @@ s[j.id]=cart[i]
    <div className="cartCard">{cartitem}</div> 
    
     <div className="advert">Total Price: {totalPrice.toFixed(0)} $
-    <button onClick={makePayment} className='addCartBtn'  > Buy Now</button>
-     
+    <button onClick={makePayment} className='addCartBtn'  > Buy Now via stripe</button>
+    <button onClick={makePayment} className='addCartBtn'  > Buy Now via phonepe</button>
+   
     </div> 
-    
-          
+   
+       
     </div>  </div> }
+    <div className='text-3xl font-bold underline'>
+      button cart page
 
+    </div> 
 
     </div>
 }

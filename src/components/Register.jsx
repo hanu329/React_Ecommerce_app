@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useDispatch } from "react-redux"
 import { addUser } from "../reduxtk/slices/userSlice"
 import { useSelector } from "react-redux"
-import './css/register.css'
+import '../../ulities/css/register.css'
 import { useNavigate } from "react-router-dom"
 import { faEyeSlash,faEye} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

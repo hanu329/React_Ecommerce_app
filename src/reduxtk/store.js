@@ -1,4 +1,4 @@
- import productSlice from './slices/productSlice'
+import productSlice from './slices/productSlice'
 import userSlice from './slices/userSlice'
 
 import {configureStore} from '@reduxjs/toolkit'

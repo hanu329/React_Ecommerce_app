@@ -1,20 +1,24 @@
 import { forwardRef } from "react"
 
-  export const Hoc=({com})=>{
+  export const Hoc=()=>{
     return (
         <div>
-            <Demo2 />
-            {/* <Hocr com={Demo}/>
+            {/* <Demo2 /> */}
+            <Hocr com={Demo}/>
             <Hocg com={Demo}/>
-            <Hocg com={Demo1}/> */}
+            <Hocg com={Demo1}/>
         </div>
     )
 }
 
+var st={
+    color:"green",
+    fontSize:"20px"
+}
 
 export const Hocg=(props)=>{
     return(
-        <div style={{color:'green'}}>hoc page  {<props.com />} </div>
+        <div style={st}>hoc page  {<props.com />} </div>
     )
 }
 

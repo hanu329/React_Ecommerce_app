@@ -5,12 +5,12 @@ import axios from 'axios'
 import { useDispatch } from "react-redux"
 import { userStatus ,userDetails} from "../reduxtk/slices/userSlice"
 import { useSelector } from "react-redux"
-import './css/login.css'
+import '../../ulities/css/login.css'
 import { faEyeSlash,faEye} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const Login=()=>{
-    const [formData, setFormData] = useState({email:"",password:""})
+    const [formData, setFormData] = useState({email:"", password:"", })
  
 const navigate= useNavigate()
 const dispatch= useDispatch()
@@ -31,8 +31,7 @@ const usr=useSelector((state)=>state.user)
          console.log(res)
            //let usr=JSON.parse(res.data)
            let usr = res.data;
-           console.log(usr)
-           console.log(formData)
+         
            for(let i=0; i<usr.length; i++){
             
             if(usr[i].password==formData.password && usr[i].email==formData.email){
@@ -49,6 +48,8 @@ const usr=useSelector((state)=>state.user)
            }
           
     }
+
+
     const handleEye =(v)=>{
         if(v==1){
           

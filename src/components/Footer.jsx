@@ -1,5 +1,5 @@
 
-import './css/footer.css'
+import '../../ulities/css/footer.css'
 export const Footer =()=>{
 
 

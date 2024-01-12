@@ -16,10 +16,12 @@
     /* border:2px solid red; */
     display: flex;
     color:green;
+  
 }
 .cartCard{
     width:80%;
     /* border:2px solid brown; */
+    
 }
 .cartInnerDiv{
     /* border:2px solid yellow;  */
@@ -31,6 +33,8 @@
 }
 .cartInnerDiv>div{
     margin-right:20px;
+    background:white;
+    
 }
 .cartTitlePrice{
     margin:20px 20px;
@@ -41,6 +45,7 @@
 }
 .cartPrice{
     margin-bottom:15px;
+    
 
 }
 .cartRemoveBtn{
@@ -64,4 +69,7 @@
     width:100px;
     margin-right:15px;
     border-radius: 15px;
+}
+.cartParentDiv{
+    background:white;
 }
